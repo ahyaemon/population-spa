@@ -1,0 +1,10 @@
+.prefectures {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 600px;
+}
+
+.item {
+    width: 80px;
+    font-size: small;
+}
