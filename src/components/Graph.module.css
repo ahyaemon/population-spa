@@ -1,4 +1,6 @@
 .graph {
     border: black 1px solid;
     display: flex;
+    height: 300px;
+    max-width: 400px;
 }
