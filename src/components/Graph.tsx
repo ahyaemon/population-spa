@@ -1,46 +1,22 @@
 import {Component, For} from "solid-js";
+import {getFromToList, getPopulationsOfAll, PopulationApiResultType} from "../lib/population";
 import {populationApiResult} from "../sample/population";
-
-type Population = {
-    year: number,
-    value: number,
-    rate: number,
-}
-
-type PopulationOfAll = Omit<Population, "rate">
-
-type PopulationApiResultType = {
-    message: null,
-    result: {
-        boundaryYear: number,
-        data: [
-            {
-                label: "総人口",
-                data: PopulationOfAll[],
-            },
-            {
-                label: "年少人口",
-                data: Population[],
-            }
-        ]
-    }
-}
-
-function getPopulationsOfAll(populationApiResult: PopulationApiResultType): PopulationOfAll[] {
-    return populationApiResult.result.data.find(it => it.label === "総人口")!.data
-}
+import classes from "./Graph.module.css"
+import {Bar} from "./graph/Bar";
 
 export const Graph: Component = () => {
 
     const populations = getPopulationsOfAll(populationApiResult as PopulationApiResultType)
+    const min = Math.min(...populations.map(p => p.value))
+    const max = Math.max(...populations.map(p => p.value))
+    const fromToList = getFromToList(populations)
 
     return (
-        <div>
-            <For each={populations}>{ population =>(
-                <div>
-                    {population.year}年: {population.value}人<br/>
-                </div>
+        <div class={classes.graph}>
+            <For each={fromToList}>{ fromTo =>(
+                <Bar min={min} max={max} from={fromTo.from} to={fromTo.to}/>
             )}</For>
         </div>
     )
 }
+
