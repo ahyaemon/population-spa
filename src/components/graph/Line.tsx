@@ -1,10 +1,10 @@
 import {Component, For} from "solid-js";
-import {getFromToList, getPopulationsOfAll, PopulationApiResultType} from "../lib/population";
-import {populationApiResult} from "../sample/population";
-import classes from "./Graph.module.css"
-import {Bar} from "./graph/Bar";
+import {getFromToList, getPopulationsOfAll, PopulationApiResultType} from "../../lib/population";
+import {populationApiResult} from "../../sample/population";
+import classes from "./Line.module.css"
+import {Bar} from "./Bar";
 
-export const Graph: Component = () => {
+export const Line: Component = () => {
 
     const populations = getPopulationsOfAll(populationApiResult as PopulationApiResultType)
     const min = Math.min(...populations.map(p => p.value))
