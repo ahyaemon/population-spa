@@ -10,6 +10,7 @@ export const Line: Component = () => {
     const min = Math.min(...populations.map(p => p.value))
     const max = Math.max(...populations.map(p => p.value))
     const fromToList = getFromToList(populations)
+    console.log(fromToList)
 
     return (
         <div class={classes.graph}>
