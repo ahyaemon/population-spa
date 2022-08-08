@@ -1,5 +1,5 @@
 import {Component} from 'solid-js';
-import {prefecturesApiResult} from "./sample/prefectures";
+import prefecturesApiResult from "./data/prefectures.json"
 import {Prefectures} from "./components/Prefectures";
 import {Graph} from "./components/Graph";
 
