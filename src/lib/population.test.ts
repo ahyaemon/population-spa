@@ -1,8 +1,7 @@
-import {FromTo, getFromToList, PopulationOfAll} from "./population";
+import { FromTo, getFromToList, PopulationOfAll } from './population'
 
-describe("getFromToList", () => {
-
-    test("人口推移から From To のリストを作成", () => {
+describe('getFromToList', () => {
+    test('人口推移から From To のリストを作成', () => {
         const populations: PopulationOfAll[] = [
             { year: 2010, value: 1000 },
             { year: 2015, value: 1500 },

@@ -1,4 +1,4 @@
-import {Population, PopulationOfAll} from "./lib/population";
+import { Population, PopulationOfAll } from './lib/population'
 
 type PrefecturesApiResult = {
     message: string | null,
@@ -9,7 +9,7 @@ type PrefecturesApiResult = {
 }
 
 export async function getPrefectures(): Promise<PrefecturesApiResult> {
-    return await import("./data/prefectures.json")
+    return import('./data/prefectures.json')
 }
 
 type PopulationApiResult = {
@@ -18,11 +18,11 @@ type PopulationApiResult = {
         boundaryYear: number,
         data: [
             {
-                label: "総人口",
+                label: '総人口',
                 data: PopulationOfAll[],
             },
             {
-                label: "年少人口",
+                label: '年少人口',
                 data: Population[],
             }
         ]
@@ -30,5 +30,5 @@ type PopulationApiResult = {
 }
 
 export async function getPopulation(code: number): Promise<PopulationApiResult> {
-    return await import(`./data/${code}.json`)
+    return import(`./data/${code}.json`)
 }

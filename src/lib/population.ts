@@ -4,7 +4,7 @@ export type Population = {
     rate: number,
 }
 
-export type PopulationOfAll = Omit<Population, "rate">
+export type PopulationOfAll = Omit<Population, 'rate'>
 
 export type PopulationApiResultType = {
     message: null,
@@ -12,24 +12,25 @@ export type PopulationApiResultType = {
         boundaryYear: number,
         data: [
             {
-                label: "総人口",
+                label: '総人口',
                 data: PopulationOfAll[],
             },
             {
-                label: "年少人口",
+                label: '年少人口',
                 data: Population[],
             }
         ]
     }
 }
 
-export function getPopulationsOfAll(populationApiResult: PopulationApiResultType): PopulationOfAll[] {
-    const one = populationApiResult.result.data.find(it => it.label === "総人口")
+export function getPopulationsOfAll(
+    populationApiResult: PopulationApiResultType,
+): PopulationOfAll[] {
+    const one = populationApiResult.result.data.find((it) => it.label === '総人口')
     if (one) {
         return one.data
-    } else {
-        return []
     }
+    return []
 }
 
 export type FromTo = {
@@ -38,7 +39,7 @@ export type FromTo = {
 }
 
 export function getFromToList(populations: PopulationOfAll[]): FromTo[] {
-    return  populations
+    return populations
         .slice(1)
         .map((p, i) => ({ from: populations[i].value, to: p.value }))
 }

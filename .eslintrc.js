@@ -16,8 +16,31 @@ module.exports = {
     '@typescript-eslint',
     'solid',
   ],
+  settings: {
+    // これを入れないと、Missing file extension "ts" で怒られる
+    "import/resolver": {
+      "node": {
+        "extensions": [
+          ".js",
+          ".jsx",
+          ".ts",
+          ".tsx"
+        ]
+      }
+    }
+  },
   rules: {
     semi: ["error", "never"],
     indent: ["error", 4],
+    // これを入れないと、Missing file extension "ts" で怒られる
+    "import/extensions": [
+      "error", "always",
+      {
+        "js": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never"
+      }
+    ],
   },
 };
