@@ -1,11 +1,11 @@
-import {Component, createEffect, createSignal, splitProps} from "solid-js";
-import classes from "./Bar.module.css"
-import {FromTo} from "../../lib/population";
+import { Component, createEffect, createSignal, splitProps } from 'solid-js'
+import classes from './Bar.module.css'
+import { FromTo } from '../../lib/population'
 
 type BarProps = {
-    min: number,
-    max: number,
-    fromTo: FromTo,
+    min: number
+    max: number
+    fromTo: FromTo
 }
 
 function createStyle(min: number, max: number, fromTo: FromTo): string {
@@ -15,7 +15,7 @@ function createStyle(min: number, max: number, fromTo: FromTo): string {
     const top = isAscendant ? fromTo.to : fromTo.from
     const marginTop = (max - top) / n
     const height = Math.abs(fromTo.to - fromTo.from) / n
-    const direction = isAscendant ? "bottom" : "top"
+    const direction = isAscendant ? 'bottom' : 'top'
 
     return `
         margin-top: ${marginTop}px;
@@ -24,10 +24,9 @@ function createStyle(min: number, max: number, fromTo: FromTo): string {
     `
 }
 
-export const Bar: Component<BarProps> = (props) => {
-
-    const [ local ] = splitProps(props, ["min", "max", "fromTo"])
-    const [style, setStyle] = createSignal<string>("")
+export const Bar: Component<BarProps> = props => {
+    const [local] = splitProps(props, ['min', 'max', 'fromTo'])
+    const [style, setStyle] = createSignal<string>('')
 
     createEffect(() => {
         setStyle(createStyle(local.min, local.max, local.fromTo))

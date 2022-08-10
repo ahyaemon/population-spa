@@ -1,4 +1,4 @@
 export type Prefecture = {
-    code: number,
-    name: string,
+    code: number
+    name: string
 }

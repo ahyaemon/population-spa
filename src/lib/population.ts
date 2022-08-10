@@ -1,32 +1,34 @@
 export type Population = {
-    year: number,
-    value: number,
-    rate: number,
+    year: number
+    value: number
+    rate: number
 }
 
 export type PopulationOfAll = Omit<Population, 'rate'>
 
 export type PopulationApiResultType = {
-    message: null,
+    message: null
     result: {
-        boundaryYear: number,
+        boundaryYear: number
         data: [
             {
-                label: '総人口',
-                data: PopulationOfAll[],
+                label: '総人口'
+                data: PopulationOfAll[]
             },
             {
-                label: '年少人口',
-                data: Population[],
+                label: '年少人口'
+                data: Population[]
             }
         ]
     }
 }
 
 export function getPopulationsOfAll(
-    populationApiResult: PopulationApiResultType,
+    populationApiResult: PopulationApiResultType
 ): PopulationOfAll[] {
-    const one = populationApiResult.result.data.find((it) => it.label === '総人口')
+    const one = populationApiResult.result.data.find(
+        it => it.label === '総人口'
+    )
     if (one) {
         return one.data
     }
@@ -34,8 +36,8 @@ export function getPopulationsOfAll(
 }
 
 export type FromTo = {
-    from: number,
-    to: number,
+    from: number
+    to: number
 }
 
 export function getFromToList(populations: PopulationOfAll[]): FromTo[] {
