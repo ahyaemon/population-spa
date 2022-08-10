@@ -2,6 +2,7 @@ module.exports = {
   env: {
     browser: true,
     es2021: true,
+    jest: true,
   },
   extends: [
     'airbnb-base',
@@ -18,28 +19,28 @@ module.exports = {
   ],
   settings: {
     // これを入れないと、Missing file extension "ts" で怒られる
-    "import/resolver": {
-      "node": {
-        "extensions": [
-          ".js",
-          ".jsx",
-          ".ts",
-          ".tsx"
+    'import/resolver': {
+      'node': {
+        'extensions': [
+          '.js',
+          '.jsx',
+          '.ts',
+          '.tsx',
         ]
       }
     }
   },
   rules: {
-    semi: ["error", "never"],
-    indent: ["error", 4],
+    semi: ['error', 'never'],
+    indent: ['error', 4],
     // これを入れないと、Missing file extension "ts" で怒られる
-    "import/extensions": [
-      "error", "always",
+    'import/extensions': [
+      'error', 'always',
       {
-        "js": "never",
-        "jsx": "never",
-        "ts": "never",
-        "tsx": "never"
+        'js': 'never',
+        'jsx': 'never',
+        'ts': 'never',
+        'tsx': 'never',
       }
     ],
   },
