@@ -24,7 +24,12 @@ export type PopulationApiResultType = {
 }
 
 export function getPopulationsOfAll(populationApiResult: PopulationApiResultType): PopulationOfAll[] {
-    return populationApiResult.result.data.find(it => it.label === "総人口")!.data
+    const one = populationApiResult.result.data.find(it => it.label === "総人口")
+    if (one) {
+        return one.data
+    } else {
+        return []
+    }
 }
 
 export type FromTo = {
