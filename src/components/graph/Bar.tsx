@@ -1,32 +1,41 @@
-import {Component} from "solid-js";
+import {Component, createEffect, createSignal, splitProps} from "solid-js";
 import classes from "./Bar.module.css"
+import {FromTo} from "../../lib/population";
 
 type BarProps = {
     min: number,
     max: number,
-    from: number,
-    to: number,
+    fromTo: FromTo,
 }
 
-export const Bar: Component<BarProps> = (props) => {
-    const { min, max, from, to } = props
+function createStyle(min: number, max: number, fromTo: FromTo): string {
     const n = (max - min) / 300
-    const isAscendant = to - from >= 0
+    const isAscendant = fromTo.to - fromTo.from >= 0
 
-    const top = isAscendant ? to : from
+    const top = isAscendant ? fromTo.to : fromTo.from
     const marginTop = (max - top) / n
-    const height = Math.abs(to - from) / n
+    const height = Math.abs(fromTo.to - fromTo.from) / n
     const direction = isAscendant ? "bottom" : "top"
 
-    const lineBoxStyles = `
+    return `
         margin-top: ${marginTop}px;
         height: ${height}px;
         background-image: linear-gradient(to right ${direction}, transparent 48%, black 48%, black 52%, transparent 52%);
     `
+}
+
+export const Bar: Component<BarProps> = (props) => {
+
+    const [ local ] = splitProps(props, ["min", "max", "fromTo"])
+    const [style, setStyle] = createSignal<string>("")
+
+    createEffect(() => {
+        setStyle(createStyle(local.min, local.max, local.fromTo))
+    })
 
     return (
         <div class={classes.bar}>
-            <div class={classes.lineBox} style={lineBoxStyles}></div>
+            <div class={classes.lineBox} style={style()}></div>
         </div>
     )
 }
