@@ -1,11 +1,7 @@
 import { Component, createEffect, createSignal, Match, Switch } from 'solid-js'
-import {
-    FromTo,
-    getFromToList,
-    getPopulationsOfAll,
-} from '../../lib/population'
+import { FromTo, getFromToList } from '../../lib/population'
 import classes from './Canvas.module.css'
-import { getPopulation } from '../../api'
+import { getPopulations } from '../../api'
 import { Line } from './Line'
 
 type LineProps = {
@@ -24,8 +20,7 @@ export const Canvas: Component<LineProps> = props => {
             return
         }
         setCodeExists(true)
-        const populationApiResult = await getPopulation(props.codes[0])
-        const populations = getPopulationsOfAll(populationApiResult)
+        const populations = await getPopulations(props.codes[0])
         setFromToList(getFromToList(populations))
         setMin(Math.min(...populations.map(p => p.value)))
         setMax(Math.max(...populations.map(p => p.value)))
