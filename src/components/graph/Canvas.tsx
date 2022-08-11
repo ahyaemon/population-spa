@@ -11,7 +11,7 @@ import {
     getFromToList,
     getPopulationsOfAll,
 } from '../../lib/population'
-import classes from './Line.module.css'
+import classes from './Canvas.module.css'
 import { Bar } from './Bar'
 import { getPopulation } from '../../api'
 
@@ -19,7 +19,7 @@ type LineProps = {
     codes: number[]
 }
 
-export const Line: Component<LineProps> = props => {
+export const Canvas: Component<LineProps> = props => {
     const [codeExists, setCodeExists] = createSignal<boolean>(false)
     const [min, setMin] = createSignal<number>(0)
     const [max, setMax] = createSignal<number>(0)
@@ -41,7 +41,7 @@ export const Line: Component<LineProps> = props => {
     return (
         <Switch>
             <Match when={codeExists()}>
-                <div class={classes.graph}>
+                <div class={classes.canvas}>
                     <For each={fromToList()}>
                         {fromTo => (
                             <Bar min={min()} max={max()} fromTo={fromTo} />
@@ -50,7 +50,7 @@ export const Line: Component<LineProps> = props => {
                 </div>
             </Match>
             <Match when={!codeExists()}>
-                <div class={classes.graph}>empty</div>
+                <div class={classes.canvas}>empty</div>
             </Match>
         </Switch>
     )

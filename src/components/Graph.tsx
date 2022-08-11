@@ -1,5 +1,5 @@
 import { Component } from 'solid-js'
-import { Line } from './graph/Line'
+import { Canvas } from './graph/Canvas'
 import { YAxis } from './graph/YAxis'
 import classes from './Graph.module.css'
 import { Legend } from './graph/Legend'
@@ -13,7 +13,7 @@ export const Graph: Component<GraphProps> = props => {
     return (
         <div class={classes.graph}>
             <YAxis />
-            <Line codes={props.codes} />
+            <Canvas codes={props.codes} />
             <Legend />
             <div />
             <XAxis />
