@@ -2,7 +2,7 @@ import { Component, createSignal, For, onMount } from 'solid-js'
 import { Prefectures } from './components/Prefectures'
 import { Graph } from './components/Graph'
 import { Prefecture } from './lib/prefecture'
-import { getPrefectures } from './api'
+import { fetchPrefectures } from './api'
 
 const App: Component = () => {
     const [prefectures, setPrefectures] = createSignal<Prefecture[]>([])
@@ -11,7 +11,7 @@ const App: Component = () => {
     >([])
 
     onMount(async () => {
-        const prefecturesApiResult = await getPrefectures()
+        const prefecturesApiResult = await fetchPrefectures()
         setPrefectures(
             prefecturesApiResult.result.map(r => ({
                 code: r.prefCode,

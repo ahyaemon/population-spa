@@ -1,8 +1,8 @@
 import { Component, createEffect, createSignal, Match, Switch } from 'solid-js'
 import { FromTo, getFromToList } from '../../lib/population'
 import classes from './Canvas.module.css'
-import { getPopulations } from '../../api'
 import { Line } from './Line'
+import { getPopulations } from '../../store'
 
 type LineProps = {
     codes: number[]

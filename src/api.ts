@@ -8,7 +8,7 @@ type PrefecturesApiResult = {
     }[]
 }
 
-export async function getPrefectures(): Promise<PrefecturesApiResult> {
+export async function fetchPrefectures(): Promise<PrefecturesApiResult> {
     return import('./data/prefectures.json')
 }
 
@@ -29,7 +29,7 @@ export type PopulationApiResult = {
     }
 }
 
-export async function getPopulation(
+export async function fetchPopulation(
     code: number
 ): Promise<PopulationApiResult> {
     return import(`./data/${code}.json`)
@@ -39,8 +39,8 @@ function isAll(data: { label: string }): boolean {
     return data.label === '総人口'
 }
 
-export async function getPopulations(code: number): Promise<Population[]> {
-    const populationApiResult = await getPopulation(code)
+export async function fetchPopulations(code: number): Promise<Population[]> {
+    const populationApiResult = await fetchPopulation(code)
 
     const all = populationApiResult.result.data.find(isAll)
     if (all) {
