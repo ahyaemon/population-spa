@@ -1,19 +1,12 @@
-import {
-    Component,
-    createEffect,
-    createSignal,
-    For,
-    Match,
-    Switch,
-} from 'solid-js'
+import { Component, createEffect, createSignal, Match, Switch } from 'solid-js'
 import {
     FromTo,
     getFromToList,
     getPopulationsOfAll,
 } from '../../lib/population'
 import classes from './Canvas.module.css'
-import { Bar } from './Bar'
 import { getPopulation } from '../../api'
+import { Line } from './Line'
 
 type LineProps = {
     codes: number[]
@@ -42,11 +35,7 @@ export const Canvas: Component<LineProps> = props => {
         <Switch>
             <Match when={codeExists()}>
                 <div class={classes.canvas}>
-                    <For each={fromToList()}>
-                        {fromTo => (
-                            <Bar min={min()} max={max()} fromTo={fromTo} />
-                        )}
-                    </For>
+                    <Line min={min()} max={max()} fromToList={fromToList()} />
                 </div>
             </Match>
             <Match when={!codeExists()}>
