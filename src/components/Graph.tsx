@@ -5,11 +5,15 @@ import classes from './Graph.module.css'
 import { Legend } from './graph/Legend'
 import { XAxis } from './graph/XAxis'
 
-export const Graph: Component = () => {
+type GraphProps = {
+    codes: number[]
+}
+
+export const Graph: Component<GraphProps> = props => {
     return (
         <div class={classes.graph}>
             <YAxis />
-            <Line />
+            <Line codes={props.codes} />
             <Legend />
             <div />
             <XAxis />
