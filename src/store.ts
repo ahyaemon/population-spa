@@ -2,7 +2,7 @@ import { createSignal } from 'solid-js'
 import { Population } from './lib/population'
 import { fetchPopulations } from './api'
 
-type PopulationTransition = {
+export type PopulationTransition = {
     code: number
     populations: Population[]
 }
@@ -25,21 +25,28 @@ export function createPopulationStore(initialValue: PopulationTransition[]) {
         getMax(): number {
             return Math.max(...getAllValues(store()))
         },
-        async getPopulations(
+        async getTransition(
             code: number,
             fetch: (code: number) => Promise<Population[]> = fetchPopulations
-        ): Promise<Population[]> {
+        ): Promise<PopulationTransition> {
             const transition = store().find(it => it.code === code)
 
             if (transition === undefined) {
                 const populations = await fetch(code)
                 setStore(it => [...it, { code, populations }])
-                return populations
+                return { code, populations }
             }
 
-            return transition.populations
+            return { code, populations: transition.populations }
         },
+        async getTransitionsByCodes(
+            codes: number[],
+            fetch: (code: number) => Promise<Population[]> = fetchPopulations
+        ): Promise<PopulationTransition[]> {
+            const promises = codes.map(code => this.getTransition(code, fetch))
 
+            return await Promise.all(promises)
+        },
         setStore,
     }
 }

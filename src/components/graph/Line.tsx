@@ -1,13 +1,17 @@
-import { Component, For } from 'solid-js'
+import { Component, createEffect, createSignal, For } from 'solid-js'
 import { Bar } from './Bar'
-import { FromTo } from '../../lib/population'
+import { FromTo, getFromToList, Population } from '../../lib/population'
 
 type LineProps = {
-    fromToList: FromTo[]
+    populations: Population[]
 }
 
 export const Line: Component<LineProps> = props => {
-    return (
-        <For each={props.fromToList}>{fromTo => <Bar fromTo={fromTo} />}</For>
-    )
+    const [fromToList, setFromToList] = createSignal<FromTo[]>([])
+
+    createEffect(() => {
+        setFromToList(getFromToList(props.populations))
+    })
+
+    return <For each={fromToList()}>{fromTo => <Bar fromTo={fromTo} />}</For>
 }

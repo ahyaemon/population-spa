@@ -1,37 +1,24 @@
-import { Component, createEffect, createSignal, Match, Switch } from 'solid-js'
-import { FromTo, getFromToList } from '../../lib/population'
+import { Component, createEffect, createSignal, For } from 'solid-js'
 import classes from './Canvas.module.css'
 import { Line } from './Line'
-import { store } from '../../store'
+import { PopulationTransition, store } from '../../store'
 
 type LineProps = {
     codes: number[]
 }
 
 export const Canvas: Component<LineProps> = props => {
-    const [codeExists, setCodeExists] = createSignal<boolean>(false)
-    const [fromToList, setFromToList] = createSignal<FromTo[]>([])
+    const [transitions, setTransitions] = createSignal<PopulationTransition[]>()
 
     createEffect(async () => {
-        if (props.codes.length === 0) {
-            setCodeExists(false)
-            return
-        }
-        setCodeExists(true)
-        const populations = await store.getPopulations(props.codes[0])
-        setFromToList(getFromToList(populations))
+        setTransitions(await store.getTransitionsByCodes(props.codes))
     })
 
     return (
-        <Switch>
-            <Match when={codeExists()}>
-                <div class={classes.canvas}>
-                    <Line fromToList={fromToList()} />
-                </div>
-            </Match>
-            <Match when={!codeExists()}>
-                <div class={classes.canvas}>empty</div>
-            </Match>
-        </Switch>
+        <div class={classes.canvas}>
+            <For each={transitions()}>
+                {transition => <Line populations={transition.populations} />}
+            </For>
+        </div>
     )
 }
