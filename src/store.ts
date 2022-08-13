@@ -30,14 +30,12 @@ export function createPopulationStore(initialValue: PopulationTransition[]) {
     }
 
     return {
-        // FIXME 全ての transitions から min を出してしまっているから、選択中のもののみで計算する
         // FIXME メモ化
         min(codes: number[]): number {
             return Math.min(
                 ...getAllValues(store().filter(it => codes.includes(it.code)))
             )
         },
-        // FIXME 全ての transitions から max を出してしまっているから、選択中のもののみで計算する
         // FIXME メモ化
         max(codes: number[]): number {
             return Math.max(
