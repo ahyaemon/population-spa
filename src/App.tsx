@@ -3,6 +3,7 @@ import { Prefectures } from './components/Prefectures'
 import { Graph } from './components/Graph'
 import { Prefecture } from './lib/prefecture'
 import { fetchPrefectures } from './api'
+import classes from './App.module.css'
 
 const App: Component = () => {
     const [prefectures, setPrefectures] = createSignal<Prefecture[]>([])
@@ -21,13 +22,17 @@ const App: Component = () => {
     })
 
     return (
-        <div>
-            人口推移
-            <Prefectures
-                prefectures={prefectures()}
-                setCodes={setSelectedPrefectureCodes}
-            />
-            <Graph codes={selectedPrefectureCodes()} />
+        <div class={classes.app}>
+            <div>人口推移</div>
+            <div>
+                <Prefectures
+                    prefectures={prefectures()}
+                    setCodes={setSelectedPrefectureCodes}
+                />
+            </div>
+            <div>
+                <Graph codes={selectedPrefectureCodes()} />
+            </div>
         </div>
     )
 }
