@@ -31,6 +31,8 @@ export function createPopulationStore(initialValue: PopulationTransition[]) {
 
     return {
         // FIXME メモ化
+        // FIXME This function should be passed to a tracked scope (like createEffect) or an event handler because it contains reactivity
+        // https://github.com/joshwilsonvu/eslint-plugin-solid/blob/main/docs/reactivity.md
         min(codes: number[]): number {
             return Math.min(
                 ...getAllValues(store().filter(it => codes.includes(it.code)))
