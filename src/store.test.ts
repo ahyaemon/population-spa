@@ -29,17 +29,17 @@ const transition3 = {
 
 const transitions = [transition1, transition2, transition3]
 
-describe('getMin', () => {
-    test('複数のPopulationTransitionの中から最小の値を見つけられる', () => {
+describe('min', () => {
+    test('指定した code のリストに対する Populations の中から最小の値を取得する', () => {
         const store = createPopulationStore(transitions)
-        expect(store.getMin()).toStrictEqual(50)
+        expect(store.min([2, 3])).toStrictEqual(300)
     })
 })
 
-describe('getMax', () => {
-    test('複数のPopulationTransitionの中から最大の値を見つけられる', () => {
+describe('max', () => {
+    test('指定した code のリストに対する Populations の中から最大の値を取得する', () => {
         const store = createPopulationStore(transitions)
-        expect(store.getMin()).toStrictEqual(50)
+        expect(store.max([2, 3])).toStrictEqual(900)
     })
 })
 

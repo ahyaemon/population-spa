@@ -4,6 +4,8 @@ import { FromTo, getFromToList, Population } from '../../lib/population'
 import classes from './Line.module.css'
 
 type LineProps = {
+    min: number
+    max: number
     populations: Population[]
 }
 
@@ -16,7 +18,11 @@ export const Line: Component<LineProps> = props => {
 
     return (
         <div class={classes.line}>
-            <For each={fromToList()}>{fromTo => <Bar fromTo={fromTo} />}</For>
+            <For each={fromToList()}>
+                {fromTo => (
+                    <Bar min={props.min} max={props.max} fromTo={fromTo} />
+                )}
+            </For>
         </div>
     )
 }

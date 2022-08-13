@@ -1,9 +1,10 @@
 import { Component, createEffect, createSignal, splitProps } from 'solid-js'
 import classes from './Bar.module.css'
 import { FromTo } from '../../lib/population'
-import { store } from '../../store'
 
 type BarProps = {
+    min: number
+    max: number
     fromTo: FromTo
 }
 
@@ -24,11 +25,11 @@ function createStyle(min: number, max: number, fromTo: FromTo): string {
 }
 
 export const Bar: Component<BarProps> = props => {
-    const [local] = splitProps(props, ['fromTo'])
+    const [local] = splitProps(props, ['min', 'max', 'fromTo'])
     const [style, setStyle] = createSignal<string>('')
 
     createEffect(() => {
-        setStyle(createStyle(store.getMin(), store.getMax(), local.fromTo))
+        setStyle(createStyle(local.min, local.max, local.fromTo))
     })
 
     return (

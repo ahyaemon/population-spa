@@ -17,7 +17,13 @@ export const Canvas: Component<LineProps> = props => {
     return (
         <div class={classes.canvas}>
             <For each={transitions()}>
-                {transition => <Line populations={transition.populations} />}
+                {transition => (
+                    <Line
+                        min={store.min(props.codes)}
+                        max={store.max(props.codes)}
+                        populations={transition.populations}
+                    />
+                )}
             </For>
         </div>
     )
