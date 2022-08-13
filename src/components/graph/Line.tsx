@@ -7,6 +7,7 @@ type LineProps = {
     min: number
     max: number
     populations: Population[]
+    color: string
 }
 
 export const Line: Component<LineProps> = props => {
@@ -20,7 +21,12 @@ export const Line: Component<LineProps> = props => {
         <div class={classes.line}>
             <For each={fromToList()}>
                 {fromTo => (
-                    <Bar min={props.min} max={props.max} fromTo={fromTo} />
+                    <Bar
+                        min={props.min}
+                        max={props.max}
+                        fromTo={fromTo}
+                        color={props.color}
+                    />
                 )}
             </For>
         </div>

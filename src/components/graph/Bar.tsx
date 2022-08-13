@@ -6,9 +6,15 @@ type BarProps = {
     min: number
     max: number
     fromTo: FromTo
+    color: string
 }
 
-function createStyle(min: number, max: number, fromTo: FromTo): string {
+function createStyle(
+    min: number,
+    max: number,
+    fromTo: FromTo,
+    color: string
+): string {
     const n = (max - min) / 300
     const isAscendant = fromTo.to - fromTo.from >= 0
 
@@ -20,16 +26,16 @@ function createStyle(min: number, max: number, fromTo: FromTo): string {
     return `
         margin-top: ${marginTop}px;
         height: ${height}px;
-        background-image: linear-gradient(to right ${direction}, transparent 48%, black 48%, black 52%, transparent 52%);
+        background-image: linear-gradient(to right ${direction}, transparent 48%, ${color} 48%, ${color} 52%, transparent 52%);
     `
 }
 
 export const Bar: Component<BarProps> = props => {
-    const [local] = splitProps(props, ['min', 'max', 'fromTo'])
+    const [local] = splitProps(props, ['min', 'max', 'fromTo', 'color'])
     const [style, setStyle] = createSignal<string>('')
 
     createEffect(() => {
-        setStyle(createStyle(local.min, local.max, local.fromTo))
+        setStyle(createStyle(local.min, local.max, local.fromTo, local.color))
     })
 
     return (
