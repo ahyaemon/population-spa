@@ -16,7 +16,7 @@ export function createPopulationStore(initialValue: PopulationTransition[]) {
 
     const getTransition = async (
         code: number,
-        fetch: (code: number) => Promise<Population[]> = fetchPopulations
+        fetch: typeof fetchPopulations = fetchPopulations
     ): Promise<PopulationTransition> => {
         const transition = store().find(it => it.code === code)
 
@@ -46,11 +46,11 @@ export function createPopulationStore(initialValue: PopulationTransition[]) {
         },
         async getTransitionsByCodes(
             codes: number[],
-            fetch: (code: number) => Promise<Population[]> = fetchPopulations
+            fetch: typeof fetchPopulations = fetchPopulations
         ): Promise<PopulationTransition[]> {
             const promises = codes.map(code => getTransition(code, fetch))
 
-            return await Promise.all(promises)
+            return Promise.all(promises)
         },
         setStore,
     }
