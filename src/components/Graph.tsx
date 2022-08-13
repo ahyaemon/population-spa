@@ -12,7 +12,7 @@ type GraphProps = {
 export const Graph: Component<GraphProps> = props => {
     return (
         <div class={classes.graph}>
-            <YAxis />
+            <YAxis min={5143} max={23296} />
             <Canvas codes={props.codes} />
             <Legend />
             <div />

@@ -1,3 +1,24 @@
 .yaxis {
-    border: 1px solid grey;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.scale {
+    text-align: right;
+}
+
+.scaleFont {
+    font-size: small;
+    margin: 0 4px 0 0;
+    top: -10px;
+    position: relative;
+}
+
+.bar {
+    width: 10px;
+    border-top: 1px solid black;
+    position: relative;
+    top: -20px;
+    left: 50px;
 }
