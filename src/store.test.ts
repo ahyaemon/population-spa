@@ -18,7 +18,16 @@ const transition2 = {
     ],
 }
 
-const transitions = [transition1, transition2]
+const transition3 = {
+    code: 3,
+    populations: [
+        { year: 2000, value: 500 },
+        { year: 2010, value: 400 },
+        { year: 2020, value: 300 },
+    ],
+}
+
+const transitions = [transition1, transition2, transition3]
 
 describe('getMin', () => {
     test('複数のPopulationTransitionの中から最小の値を見つけられる', () => {
@@ -34,28 +43,32 @@ describe('getMax', () => {
     })
 })
 
-describe('getPopulations', () => {
-    test('すでに存在する code の場合、それに対応する populations を取得する', async () => {
+describe('getTransitions', () => {
+    test('すでに存在する code の場合、それに対応する transition を取得する', async () => {
         const store = createPopulationStore(transitions)
 
-        const populations = await store.getPopulations(1)
+        const result = await store.getTransitionsByCodes([1])
 
-        expect(populations).toStrictEqual(transition1.populations)
+        expect(result).toStrictEqual([transition1])
     })
 
-    test('存在しない code の場合、fetch してから populations を取得する', async () => {
+    test('存在しない code の場合、fetch してから transition を取得する', async () => {
         const store = createPopulationStore(transitions)
 
-        const populationForCode3 = [
-            { year: 2010, value: 100 },
-            { year: 2020, value: 200 },
-        ]
+        const transition4 = {
+            code: 4,
+            populations: [
+                { year: 2000, value: 100 },
+                { year: 2010, value: 200 },
+                { year: 2020, value: 300 },
+            ],
+        }
 
-        const populations = await store.getPopulations(
-            3,
-            async () => populationForCode3
+        const result = await store.getTransitionsByCodes(
+            [transition4.code],
+            async () => transition4.populations
         )
 
-        expect(populations).toStrictEqual(populationForCode3)
+        expect(result).toStrictEqual([transition4])
     })
 })
