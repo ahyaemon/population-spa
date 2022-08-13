@@ -1,6 +1,6 @@
 .canvas {
+    position: relative;
     border: black 1px solid;
-    display: flex;
     height: 300px;
-    max-width: 400px;
+    width: 400px;
 }

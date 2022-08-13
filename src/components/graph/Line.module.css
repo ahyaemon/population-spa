@@ -1,0 +1,6 @@
+.line {
+    position: absolute;
+    display: flex;
+    height: 300px;
+    width: 400px;
+}
