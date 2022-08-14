@@ -34,6 +34,11 @@ const App: Component = () => {
             <div>
                 <Graph codes={selectedPrefectureCodes()} />
             </div>
+            <div>
+                <a href="https://opendata.resas-portal.go.jp/" target="_blank">
+                    出典：RESAS（地域経済分析システム）
+                </a>
+            </div>
         </div>
     )
 }
