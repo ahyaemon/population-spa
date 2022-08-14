@@ -39,6 +39,14 @@ const App: Component = () => {
                     出典：RESAS（地域経済分析システム）
                 </a>
             </div>
+            <div>
+                <a
+                    href="https://github.com/ahyaemon/population-spa"
+                    target="_blank"
+                >
+                    ソースコード（GitHub）
+                </a>
+            </div>
         </div>
     )
 }
