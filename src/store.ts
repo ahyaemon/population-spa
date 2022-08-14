@@ -52,6 +52,13 @@ export function createPopulationStore(initialValue: PopulationTransition[]) {
 
             return Promise.all(promises)
         },
+        getYears(): number[] {
+            if (store().length === 0) {
+                return []
+            }
+
+            return store()[0].populations.map(it => it.year)
+        },
         setStore,
     }
 }
