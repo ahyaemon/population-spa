@@ -1,6 +1,6 @@
 .graph {
     display: grid;
     width: 600px;
-    grid-template-columns: 70px 400px 50px;
+    grid-template-columns: 70px 400px;
     grid-template-rows: 300px 50px;
 }

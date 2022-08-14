@@ -14,10 +14,8 @@ export const Graph: Component<GraphProps> = props => {
         <div class={classes.graph}>
             <YAxis codes={props.codes} />
             <Canvas codes={props.codes} />
-            <Legend />
             <div />
             <XAxis />
-            <div />
         </div>
     )
 }
