@@ -1,8 +1,10 @@
-import { Component, For, splitProps } from 'solid-js'
+import { Component, For } from 'solid-js'
 import classes from './Prefectures.module.css'
+import { colors } from '../lib/colors'
 
 type PrefecturesProps = {
     prefectures: { code: number; name: string }[]
+    selectedCodes: number[]
     setCodes: (callback: (codes: number[]) => number[]) => void
 }
 
@@ -18,22 +20,36 @@ export const Prefectures: Component<PrefecturesProps> = props => {
     return (
         <div class={classes.prefectures}>
             <For each={props.prefectures}>
-                {prefecture => (
-                    <label class={classes.item}>
-                        <input
-                            type="checkbox"
-                            onClick={e => {
-                                if (e.currentTarget.checked) {
-                                    addCode(prefecture.code)
-                                } else {
-                                    removeCode(prefecture.code)
-                                }
-                            }}
-                        />
-                        {prefecture.name}
-                    </label>
-                )}
+                {prefecture => {
+                    return (
+                        <label
+                            class={classes.item}
+                            style={createStyle(
+                                props.selectedCodes,
+                                prefecture.code
+                            )}
+                        >
+                            <input
+                                type="checkbox"
+                                onClick={e => {
+                                    if (e.currentTarget.checked) {
+                                        addCode(prefecture.code)
+                                    } else {
+                                        removeCode(prefecture.code)
+                                    }
+                                }}
+                            />
+                            {prefecture.name}
+                        </label>
+                    )
+                }}
             </For>
         </div>
     )
+}
+
+function createStyle(codes: number[], code: number): string {
+    const index = codes.indexOf(code)
+    const color = index === -1 ? 'black' : colors[index]
+    return `color: ${color};`
 }

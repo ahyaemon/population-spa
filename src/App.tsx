@@ -27,6 +27,7 @@ const App: Component = () => {
             <div>
                 <Prefectures
                     prefectures={prefectures()}
+                    selectedCodes={selectedPrefectureCodes()}
                     setCodes={setSelectedPrefectureCodes}
                 />
             </div>
